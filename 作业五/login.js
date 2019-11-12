@@ -20,25 +20,17 @@ app.get('login_bg.jpg',(req,res)=>{
     res.sendFile(__dirname+'/logo_bg.jpg');   
   });
 app.post('/login',function(req,res){
+  var list=item.chapterList;
 　　if(req.body.username===item.users[0].username&&req.body.password===item.users[0].password) {
-     res.render('list');
+    res.render('list',{list});
 　　}else{
 　　　　res.send( 404 );
 }
 });
-app.use(cookieParser());
-app.get('/list', (req, res) => {
-    var title1=item.chapterList[0].title;
-    var lists=[
-        {title:title1,views:'item.charpterList[0].views'}
-    ]
-     res.render('list',{ title: 'Express' ,data:lists});
-     console.log(lists);
-//   console.log('cookie:', req.cookies);
 
-//   res.cookie('name', 'wangding', {maxAge: 100000, httpOnly: true});
-//   res.cookie('age', 41, {maxAge: 100000});
-// res.send('ok');
-//  console.log(res);
+app.get('/list', (req, res) => {
+   var list=item.chapterList;   
+     console.log(list[0]);
+     res.render('list',{list});
 });
 app.listen(8080)
